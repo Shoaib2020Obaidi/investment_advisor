@@ -1,0 +1,125 @@
+SELECT * FROM munster_districts;
+SELECT * FROM attraction_sites;
+SELECT * FROM bakeries;
+SELECT * FROM bicycle_shops;
+SELECT * FROM bus_stops;
+SELECT * FROM cafes;
+SELECT * FROM children_playground;
+SELECT * FROM commercials;
+SELECT * FROM cycleways;
+SELECT * FROM fast_foods;
+SELECT * FROM gov_offices;
+SELECT * FROM green_spaces;
+SELECT * FROM hotels;
+SELECT * FROM houses;
+SELECT * FROM parkings;
+SELECT * FROM parks;
+SELECT * FROM restaurants;
+SELECT * FROM schools;
+SELECT * FROM spatial_ref_sys;
+SELECT * FROM sport_facilities;
+SELECT * FROM supermarkets;
+SELECT * FROM vending_parkings;
+SELECT * FROM waters;
+
+SELECT COUNT(*) AS total_rows FROM munster_districts;
+SELECT COUNT(*) AS total_rows FROM attraction_sites;
+SELECT COUNT(*) AS total_rows FROM bakeries;
+SELECT COUNT(*) AS total_rows FROM bicycle_shops;
+SELECT COUNT(*) AS total_rows FROM bus_stops;
+SELECT COUNT(*) AS total_rows FROM cafes;
+SELECT COUNT(*) AS total_rows FROM children_playground;
+SELECT COUNT(*) AS total_rows FROM commercials;
+SELECT COUNT(*) AS total_rows FROM cycleways;
+SELECT COUNT(*) AS total_rows FROM fast_foods;
+SELECT COUNT(*) AS total_rows FROM gov_offices;
+SELECT COUNT(*) AS total_rows FROM green_spaces;
+SELECT COUNT(*) AS total_rows FROM hotels;
+SELECT COUNT(*) AS total_rows FROM houses;
+SELECT COUNT(*) AS total_rows FROM parkings;
+SELECT COUNT(*) AS total_rows FROM parks;
+SELECT COUNT(*) AS total_rows FROM restaurants;
+SELECT COUNT(*) AS total_rows FROM schools;
+SELECT COUNT(*) AS total_rows FROM sport_facilities;
+SELECT COUNT(*) AS total_rows FROM supermarkets;
+SELECT COUNT(*) AS total_rows FROM vending_parkings;
+SELECT COUNT(*) AS total_rows FROM waters;
+
+SELECT district_name, area FROM munster_districts
+WHERE district_name = '5001-007'
+
+
+
+SELECT SUM(district_population) AS total_sum FROM munster_districts;
+
+UPDATE restaurants
+SET district_name = munster_districts.district_name
+FROM munster_districts
+WHERE ST_Contains(munster_districts.geom, restaurants.geom);
+
+SELECT ST_SRID(geom) 
+FROM munster_districts
+LIMIT 1;
+
+SELECT ST_SRID(geom) 
+FROM restaurants
+LIMIT 1;
+
+UPDATE fast_foods
+SET geom = ST_Transform(geom, 25832);
+
+
+-- Cafes
+	SELECT  
+        district_name, area,
+		ST_Transform(ST_SetSRID(geom, 25832), 4326) AS geom,
+        (COALESCE(attraction_site_score, 0) + COALESCE(bus_stops_score, 0) + COALESCE(children_pground_score, 0) + 
+         COALESCE(cycleways_score, 0) + COALESCE(gov_offices_score, 0) + COALESCE(hotels_score, 0) + 
+         COALESCE(parkings_score, 0) + COALESCE(parks_score, 0) + 
+         COALESCE(schools_score, 0) + COALESCE(sport_facilities_score, 0) + COALESCE(supermarket_score, 0) + 
+         COALESCE(streams_score, 0) + COALESCE(fast_food_score, 0) + COALESCE(bicycle_shop_score, 0)) AS total_sum,
+        cafes_count, hotels_count, houses_count, bicycle_count, 
+        schools_count, bus_stop_count, fast_food_count, restaurant_count, 
+        gov_offices_count, supermarket_count, district_population,
+        attraction_site_count, children_pground_count, sport_facilities_count,
+        vending_parkings_count
+    FROM munster_districts
+    ORDER BY total_sum DESC
+    LIMIT 1
+
+-- Restaurants
+	SELECT 
+        district_name, area, 
+		ST_Transform(ST_SetSRID(geom, 25832), 4326) AS geom, 
+        (COALESCE(attraction_site_score, 0) + COALESCE(bus_stops_score, 0) + COALESCE(children_pground_score, 0) + 
+         COALESCE(cycleways_score, 0) + COALESCE(gov_offices_score, 0) + COALESCE(hotels_score, 0) + 
+         COALESCE(parkings_score, 0) + COALESCE(vending_parkings_score, 0) + COALESCE(parks_score, 0) + 
+         COALESCE(schools_score, 0) + COALESCE(sport_facilities_score, 0) + COALESCE(supermarket_score, 0) + 
+         COALESCE(streams_score, 0) + COALESCE(fast_food_score, 0)) AS total_sum,
+        cafes_count, hotels_count, houses_count, bicycle_count, 
+        schools_count, bus_stop_count, fast_food_count, restaurant_count, 
+        gov_offices_count, supermarket_count, district_population,
+        attraction_site_count, children_pground_count, sport_facilities_count,
+        vending_parkings_count
+    FROM munster_districts
+    ORDER BY total_sum DESC
+    LIMIT 1
+	
+-- Bike Repair Shop
+    SELECT 
+           district_name, area, 
+		   ST_Transform(ST_SetSRID(geom, 25832), 4326) AS geom, 
+           (COALESCE(cafes_score, 0) + COALESCE(bus_stops_score, 0)  +  COALESCE(cycleways_score, 0) + 
+           COALESCE(schools_score, 0) + COALESCE(sport_facilities_score, 0) + COALESCE(supermarket_score, 0) + 
+           COALESCE(fast_food_score, 0)) AS total_sum,
+           cafes_count, hotels_count, houses_count, bicycle_count, 
+           schools_count, bus_stop_count, fast_food_count, restaurant_count, 
+           gov_offices_count, supermarket_count, district_population,
+           attraction_site_count, children_pground_count, sport_facilities_count,
+           vending_parkings_count
+    FROM munster_districts
+    ORDER BY total_sum DESC
+    LIMIT 1
+	
+	
+	

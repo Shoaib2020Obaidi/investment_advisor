@@ -1,0 +1,152 @@
+/* Sidebar Styles */
+.sidebar {
+  padding: 20px;  /* Increased padding */
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  width: 390px;  /* Increased width further */
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  height: 93vh; /* Maintain height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.sidebar-title {
+  font-size: 16px; /* Larger title */
+  font-weight: bold;
+  margin-bottom: -70px; /* Added space below the title */
+  text-align: center;
+  
+}
+
+.sidebar-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -80px; /* Added more space between items */
+  border: #bdbebf 1px dotted;
+  padding: 10px
+}
+
+.sidebar-item strong {
+  font-size: 14px; /* Larger font size for labels */
+  color: #5a5858;
+}
+
+.sidebar-value {
+  font-size: 14px; /* Even larger value font size */
+  color: #1195d2;
+  font-weight: bold;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.popup-content h4 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.popup button {
+  background-color: #007BFF;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #0056b3;
+}
+
+.table-title {
+  font-size: 16px; /* Larger font size for table title */
+  margin-bottom: 12px;
+  text-align: center;
+  color: #333;
+}
+
+.scrollable-table {
+  margin-top: -60px;
+  max-height: 400px; /* Limit the height of the table container */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ddd; /* Optional: Add a border for visual clarity */
+}
+
+.count-table {
+  width: 100%; /* Make the table take the full width of the container */
+  border-collapse: collapse; /* Optional: Remove spacing between cells */
+}
+
+.count-table thead th {
+  position: sticky; /* Fix the header row */
+  top: 0; /* Align the header to the top of the container */
+  background-color: #39aade; /* Background to prevent overlapping content */
+  z-index: 1; /* Ensure the header stays on top of other elements */
+  border-bottom: 2px solid #ddd; /* Optional: Add a border for the header row */
+  padding: 8px; /* Optional: Add padding for better readability */
+}
+
+.count-table td, 
+.count-table th {
+  text-align: left;
+  padding: 8px; /* Add padding for cells */
+  border-bottom: 0.2px dotted #39aade; /* Optional: Add a border for rows */
+}
+
+
+.scrollable-table {
+  max-height: 370px; /* Slightly increased table height */
+  overflow-y: auto;
+
+}
+
+.count-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.count-table th,
+.count-table td {
+  padding: 12px 15px; /* Increased padding for table cells */
+  text-align: left;
+}
+
+.count-table th {
+  background-color: #007BFF;
+  color: white;
+  font-weight: bold;
+}
+
+.count-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.count-table tr:hover {
+  background-color: #e9e9e9;
+}
+
+.count-table td {
+  color: #555;
+  font-size: 15px; /* Larger font size for table content */
+}
+
+.charts-container {
+  margin-top: -60px; /* Added space above charts */
+    color: #1195d2;
+}
+
+.chart-title {
+  text-align: center;
+  font-size: 16px; /* Larger chart title font */
+  margin-bottom: 12px;
+}
